@@ -1,0 +1,51 @@
+*{
+    margin:0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    box-sizing: border-box;
+
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height:100vh;
+    background-image: url(/images/money-2724245.jpg);
+    background-size: cover;
+}
+section{
+    margin-top: 50px;
+    text-align: center;
+}
+
+input{
+    display: block;
+    width: 350px;
+    height: 40px;
+    margin: 20px;
+    border:none;
+    font-size: 20px;
+    border-bottom: 2px solid black ;
+    background: transparent;
+    color:aliceblue
+
+}
+button{
+    width:350px;
+    height: 40px;
+    font-size: 20px;
+    background-color: yellowgreen;
+    border: none;
+    color:black;
+
+}
+section h1{
+    margin-bottom: 30px;
+    font-size: 50px;
+   
+}
+::placeholder{
+    color:whitesmoke;
+}
