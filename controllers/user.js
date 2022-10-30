@@ -1,44 +1,79 @@
 const user = require('../models/user')
-exports.signup = (req,res)=>{
-        const {name,email,password} = req.body;
-   
-    
-    if(name == undefined || name.length ===0 || email == undefined || email.length === 0 || password == undefined || password.length === 0)
+const bcrypt = require('bcrypt')
+
+function isstringinvalid(string)
+{
+    if(string == undefined || string.length === 0)
     {
-    return res.status(400).json({err:"bad parameters . something is missing"})
+        return true
     }
-    user.create({name,email,password})
-    .then((result)=>{
-        res.status(201).json({data:result})
-    })
-    .catch(err =>{
-        res.status(500).json({err})
-    })
+    else
+    {
+       return false
+    }
 }
 
-exports.login = (req,res) =>{
-    const {email,password} = req.body;
-   
-    
-    if(email == undefined || email.length === 0 || password == undefined || password.length === 0)
-    {
-    return res.status(400).json({err:"bad parameters . something is missing"})
+
+exports.signup = async (req,res)=>{
+
+
+        try{
+            const {name,email,password} = req.body;
+
+            if(isstringinvalid(name) || isstringinvalid(email) || isstringinvalid(password))
+            {
+            return res.status(400).json({err:"bad parameters . something is missing"})
+            }
+
+
+            const saltrounds =10;
+
+            bcrypt.hash(password, saltrounds , async (err,hash) => {
+            console.log(err)    
+            await user.create({name,email,password:hash})
+            res.status(201).json({message:'Successfully created'})
+        })
+        }
+
+     catch(err){
+        res.status(500).json({err})
     }
-    user.findAll({where:{email:email}})
-    .then(user => {
-        console.log(user)
-        if(user[0].password == password)
+
+}
+
+exports.login= async(req,res)=>{
+    try{
+        const email = req.body.email;
+        const password = req.body.password;
+
+        // console.log(email)
+        if(isstringinvalid(email) || isstringinvalid(password))
         {
-            res.status(200).json({message:"successfully logged in"})
-
+        return res.status(400).json({err:"bad parameters . something is missing"})
         }
-        else{
-            res.status(500).json({message:"incorrect password"})
-        }
-    })
-    .catch(err =>{
-        console.log(err)
-    })
 
+         const User = await  user.findAll({where:{email:email}})
+       console.log(User)
+       if(User.length > 0)
+       {
+        bcrypt.compare(password,User[0].password,(err,result)=>{
+            if(err)
+            {
+                res.status(500).json({success:false , message:"something went wrong"})
+            }
+            if(result == true)
+            {
+                res.status(200).json({success:true , message:"user is successfully logged"})
+            }
+            else
+            {
+                return res.status(400).json({success:false , message:"Password is incorrect"})
+            }
+           })
+       }
 
+    }
+    catch(err){
+        res.status(404).json({message:"user doesn't exist",err})
+    }
 }
