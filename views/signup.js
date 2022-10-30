@@ -1,5 +1,4 @@
 
-
 function signup(event)
 {
     event.preventDefault();
@@ -10,11 +9,14 @@ function signup(event)
 
 
     }
-    console.log(signupDetails) 
+    console.log(signupDetails) ;
 
     axios.post("http://localhost:3000/signup",signupDetails)
     .then(result =>{
-        alert("successfully sign up")
+        alert('successfully sign up')
+        window.location ="login.html"
+
+        
     })
     .catch(err =>{
         console.log(err)
