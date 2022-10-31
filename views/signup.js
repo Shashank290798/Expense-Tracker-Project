@@ -11,7 +11,7 @@ function signup(event)
     }
     console.log(signupDetails) ;
 
-    axios.post("http://localhost:3000/signup",signupDetails)
+    axios.post("http://localhost:4000/signup",signupDetails)
     .then(result =>{
         alert('successfully sign up')
         window.location ="login.html"

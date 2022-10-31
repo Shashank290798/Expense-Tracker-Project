@@ -10,10 +10,11 @@ function login(event)
     }
     console.log(loginDetails) ;
 
-    axios.post("http://localhost:3000/login",loginDetails)
+    axios.post("http://localhost:4000/login",loginDetails)
     .then(result =>{
       console.log(result)
       alert('successfully logged in')
+      window.location="expense.js"
   
     })
     .catch(err =>{

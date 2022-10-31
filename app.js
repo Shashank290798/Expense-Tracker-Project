@@ -8,20 +8,23 @@ const bodyparser =require('body-parser');
 
 const sequelize = require('./util/database');
 
-const userRoutes = require('./routes/expense');
+const expenseRoutes = require('./routes/expense');
+
 
 const user = require('./models/user');
+
+const expensedata = require('./models/expensedata')
 
 expense.use(cors());
 
 expense.use(bodyparser.json());
 
-expense.use(userRoutes);
+expense.use(expenseRoutes)
 
 sequelize
 .sync()
 .then(result =>{
-    expense.listen(3000);
+    expense.listen(4000);
 })
 .catch(err =>{
     console.log(err)

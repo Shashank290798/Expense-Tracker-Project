@@ -1,0 +1,138 @@
+/* body{
+    background-color: #EDDBC0;
+}
+
+.expense-heading{
+    text-align: center;
+    color: #4C0033;
+}
+
+.expense{
+    margin: 80px 550px;
+}
+
+label{
+    font-size:30px;
+    color: #4C0033;
+}
+
+input{
+    width:350px;
+    height: 30px;
+    border-radius: 10px;
+    border-color: rgb(178, 110, 21);
+    background-color: blanchedalmond;
+}
+
+select{
+    width: 350px;
+    height: 40px;
+    border-radius: 10px;
+    border-color: rgb(178, 110, 21);
+    background-color: blanchedalmond;
+}
+
+
+#Addbtn{
+    width:100px;
+    height: 40px;
+    margin: 0px 115px;
+    border-radius: 15px;
+    border-color: rgb(178, 110, 21);
+    background-color: blanchedalmond;
+}
+
+button{
+    width:70px;
+    border-radius: 5px;
+    background-color: rgb(212, 223, 214);
+    border:5px solid grey
+}
+
+.userlist{
+    margin:30px;
+} */
+*{
+    margin:0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    box-sizing: border-box;
+
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height:100vh;
+    background-image: url(/images/money-2724245.jpg);
+    background-size: cover;
+  
+}
+section{
+    margin-top: 50px;
+    text-align: center;
+}
+
+input{
+    display: block;
+    width: 350px;
+    height: 40px;
+    margin: 20px;
+    border:none;
+    font-size: 20px;
+    border-bottom: 2px solid black ;
+    background: transparent;
+    color:aliceblue
+
+}
+select{
+    display: block;
+    width: 350px;
+    height: 40px;
+    margin: 20px;
+    border:none;
+    font-size: 20px;
+    border-bottom: 2px solid black ;
+    background: transparent;
+    color:black
+
+}
+button{
+    width:350px;
+    height: 40px;
+    font-size: 20px;
+    background-color: yellowgreen;
+    border-width: 1px;
+    color:black;
+
+}
+section h1{
+    margin-bottom: 30px;
+    font-size: 50px;
+   
+}
+::placeholder{
+    color:darkgreen;
+    
+}
+btn1{
+    width:100px;
+    height: 20px;
+    font-size: 20px;
+    background-color: red;
+    border: none;
+    color:aliceblue;
+
+}
+btn{
+    width:150px;
+    height: 20px;
+    font-size: 20px;
+    background-color: black;
+    border: none;
+    color:white;
+    border-radius: 5px;
+
+}
