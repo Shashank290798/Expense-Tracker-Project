@@ -14,7 +14,8 @@ function login(event)
     .then(result =>{
       console.log(result)
       alert('successfully logged in')
-      window.location="expense.js"
+      window.location="expense.html"
+      localStorage.setItem('token', result.data.token)
   
     })
     .catch(err =>{

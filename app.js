@@ -21,6 +21,9 @@ expense.use(bodyparser.json());
 
 expense.use(expenseRoutes)
 
+user.hasMany(expensedata)
+expensedata.belongsTo(user)
+
 sequelize
 .sync()
 .then(result =>{

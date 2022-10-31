@@ -14,7 +14,8 @@ btn.addEventListener('click',(e)=>{
                   category:category.value
            }
            console.log(obj);
-             axios.post("http://localhost:4000/details",obj)
+           const token = localStorage.getItem('token')
+             axios.post("http://localhost:4000/details",obj,{headers:{"Authorization":token}})
              .then((response)=>{
                 showListofRegisteredUser(response.data.data)
                 console.log(response.data);
@@ -41,9 +42,11 @@ function showListofRegisteredUser(user){
         console.log(parentNode.innerHTML)
      }
      window.addEventListener('DOMContentLoaded', (e) => {
+     
 
         e.preventDefault();
-            axios.get("http://localhost:4000/userinfo")
+        const token = localStorage.getItem('token')
+            axios.get("http://localhost:4000/userinfo",{headers:{"Authorization":token}})
             .then((response)=>{
                 console.log(response)
                 for(let i=0;i<response.data.response.length;i++){
@@ -72,8 +75,8 @@ function showListofRegisteredUser(user){
 
     function deleteUser(userid)
     {
-
-        axios.delete(`http://localhost:4000/delete/${userid}`)
+        const token = localStorage.getItem('token')
+        axios.delete(`http://localhost:4000/delete/${userid}`,{headers:{"Authorization":token}})
 
         .then((response)=> 
 

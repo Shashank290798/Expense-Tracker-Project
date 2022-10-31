@@ -3,7 +3,7 @@ const user = require('../models/expensedata');
 exports.postdetails =((req,res,next)=>{
     const{expense,description,category} = req.body
     console.log({expense,description,category})
-    user.create({expense,description,category})
+    user.create({expense,description,category, userId: req.user.id})
     .then((response)=>{
     res.status(201).json({data:response})
 })
@@ -11,7 +11,7 @@ exports.postdetails =((req,res,next)=>{
 })
 
 exports.getdetails =(req,res,next)=>{
-    user.findAll()
+    user.findAll({where : {userId:req.user.id}})
     .then(response=>{
      res.status(200).json({response})
     })
@@ -20,7 +20,7 @@ exports.getdetails =(req,res,next)=>{
 
 exports.delete=(req,res,next)=>{
     const id = req.params.id;
-    user.destroy({where:{id:id}})
+    user.destroy({where:{id:id ,userId:req.user.id}})
     .then(response=>res.status(200).json({msg:'successful'}))
     .catch(err=>{
       console.log(err);
