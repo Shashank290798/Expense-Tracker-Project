@@ -50,3 +50,11 @@ section h1{
     color:darkgreen;
     
 }
+
+.forgot
+{
+  margin:0px 20px;
+  background: none;
+  border: none;
+  font-size: large;
+}

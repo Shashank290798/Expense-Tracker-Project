@@ -32,15 +32,33 @@ exports.signup = async (req,res)=>{
             {
             return res.status(400).json({err:"bad parameters . something is missing"})
             }
+            user.findAll({where:{email:email}})
+            .then(users =>{
+
+                if(users.length === 1)
+                {
+                  return  res.status(500).json({message:"user already exist"})
+                }
+                else{
+                    const saltrounds =10;
+
+                    bcrypt.hash(password, saltrounds , async (err,hash) => {
+                    console.log(err)    
+                    await user.create({email,password:hash,premiumuser:false})
+                    res.status(201).json({message:'Successfully created'})
+                })
+                }
+            })
+            .catch(err=>res.json({message:"failed"}))
 
 
-            const saltrounds =10;
+        //     const saltrounds =10;
 
-            bcrypt.hash(password, saltrounds , async (err,hash) => {
-            console.log(err)    
-            await user.create({name,email,password:hash})
-            res.status(201).json({message:'Successfully created'})
-        })
+        //     bcrypt.hash(password, saltrounds , async (err,hash) => {
+        //     console.log(err)    
+        //     await user.create({name,email,password:hash})
+        //     res.status(201).json({message:'Successfully created'})
+        // })
         }
 
      catch(err){
@@ -62,7 +80,7 @@ exports.login= async(req,res)=>{
 
          const User = await  user.findAll({where:{email:email}})
        console.log(User)
-       if(User.length > 0)
+       if(User)
        {
         bcrypt.compare(password,User[0].password,(err,result)=>{
             if(err)

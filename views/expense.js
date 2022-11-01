@@ -49,6 +49,23 @@ function showListofRegisteredUser(user){
             axios.get("http://localhost:4000/userinfo",{headers:{"Authorization":token}})
             .then((response)=>{
                 console.log(response)
+                if(response.data.user.premiumuser == true)
+                {
+                    document.getElementById('body').classList.add('premium')
+                 document.getElementById('logout').classList.add('premium')
+                 document.getElementById('Addbtn').classList.add('premium')
+                 document.getElementById('rzp-button1').classList.add('premium')
+                 document.body.innerHTML+="<a href='leaderboard.html'>leaderboard</a>" 
+                 document.getElementById('rzp-button1').remove()
+                 const logout = document.getElementById('logout')
+                logout.addEventListener('click',()=>{
+                 if(confirm('ARE U SURE'))
+                 {
+                 window.location = 'login.html'
+               }
+     })
+    
+                }
                 for(let i=0;i<response.data.response.length;i++){
                     let expense =response.data.response[i].expense
                     let description =response.data.response[i].description
@@ -99,7 +116,13 @@ function showListofRegisteredUser(user){
 
  deleteUser(id)
 }
-
+const leaderboard = document.getElementById('leaderboard')
+ leaderboard.addEventListener('click',()=>{
+    if(confirm('ARE U SURE'))
+    {
+        window.location = 'leaderboard.html'
+    }
+ })
 
 const logout = document.getElementById('logout')
  logout.addEventListener('click',()=>{
@@ -113,11 +136,11 @@ const logout = document.getElementById('logout')
     const token = localStorage.getItem('token')
     const response  = await axios.get('http://localhost:4000/purchase', { headers: {"Authorization" : token} });
     console.log(response);
-    const options =
+    var options =
     {
      "key": response.data.key_id, // Enter the Key ID generated from the Dashboard
      "name": "Test Company",
-     "order_id": response.data.order.id, // For one time payment
+     order_id: response.data.order.id, // For one time payment
      "prefill": {
        "name": "Test User",
        "email": "test.user@example.com",
@@ -134,9 +157,25 @@ const logout = document.getElementById('logout')
              payment_id: response.razorpay_payment_id,
          }, { headers: {"Authorization" : token} }).then(() => {
              alert('You are a Premium User Now')
-             window.location="expense.html"
-         }).catch(() => {
-             alert('Something went wrong. Try Again!!!')
+             console.log("premiummemeber")
+             document.getElementById('body').classList.add('premium')
+             document.getElementById('logout').classList.add('premium')
+             document.getElementById('Addbtn').classList.add('premium')
+             document.getElementById('rzp-button1').classList.add('premium')
+             document.body.innerHTML+="<a href='leaderboard.html'>leaderboard</a>" 
+             document.getElementById('rzp-button1').remove()
+             const logout = document.getElementById('logout')
+ logout.addEventListener('click',()=>{
+    if(confirm('ARE U SURE'))
+    {
+        window.location = 'login.html'
+    }
+ })
+
+         })
+         .catch((err) => {
+            console.log(err)
+            //  alert('Something went wrong. Try Again!!!')
          })
      },
   };
