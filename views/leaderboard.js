@@ -29,7 +29,7 @@ function getExpenses(id)
             let expense = result.data.data[i].expense;
             let description = result.data.data[i].description;
             let category = result.data.data[i].category;
-            leaderboard.innerHTML+= `<div> ${email} <button onclick="getExpenses(${id})">Details</button></div>`
+            container += `<div> Expense=${expense}----Description=${description}-----category=${category} </div>`
 
         }
         details.innerHTML = container

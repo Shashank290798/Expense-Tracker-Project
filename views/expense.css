@@ -1,57 +1,4 @@
-/* body{
-    background-color: #EDDBC0;
-}
 
-.expense-heading{
-    text-align: center;
-    color: #4C0033;
-}
-
-.expense{
-    margin: 80px 550px;
-}
-
-label{
-    font-size:30px;
-    color: #4C0033;
-}
-
-input{
-    width:350px;
-    height: 30px;
-    border-radius: 10px;
-    border-color: rgb(178, 110, 21);
-    background-color: blanchedalmond;
-}
-
-select{
-    width: 350px;
-    height: 40px;
-    border-radius: 10px;
-    border-color: rgb(178, 110, 21);
-    background-color: blanchedalmond;
-}
-
-
-#Addbtn{
-    width:100px;
-    height: 40px;
-    margin: 0px 115px;
-    border-radius: 15px;
-    border-color: rgb(178, 110, 21);
-    background-color: blanchedalmond;
-}
-
-button{
-    width:70px;
-    border-radius: 5px;
-    background-color: rgb(212, 223, 214);
-    border:5px solid grey
-}
-
-.userlist{
-    margin:30px;
-} */
 *{
     margin:0;
     padding: 0;
@@ -66,7 +13,7 @@ body{
     align-items: center;
     flex-direction: column;
     height:100vh;
-    background-image: url(/images/money-2724245.jpg);
+    background-image: url(data:image/jpeg;base64,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);
     background-size: cover;
   
 }
@@ -84,7 +31,7 @@ input{
     font-size: 20px;
     border-bottom: 2px solid black ;
     background: transparent;
-    color:aliceblue
+    color:black
 
 }
 select{
@@ -114,7 +61,7 @@ section h1{
    
 }
 ::placeholder{
-    color:darkgreen;
+    color:black;
     
 }
 btn1{
@@ -138,10 +85,32 @@ btn{
 }
 
 
+#leaderboard
+{
+   position: fixed; 
+   top: 10px;
+   left: 10px;
+   background: none;
+   font-size: xx-large;
+   color: #4C0033;
+}
+
+#Report
+{
+   position: fixed; 
+   top: 110px;
+   left: 10px;
+   background: none;
+   font-size: xx-large;
+   color: #4C0033;
+}
+
+
 #rzp-button1
 {
    position: fixed; 
-   bottom: 10px;
+   top: 60px;
+
    left: 10px;
    background: none;
    font-size: xx-large;
@@ -158,7 +127,7 @@ btn{
 
 #body.premium
 {
-    background-image: url(https://thumbs.dreamstime.com/z/beautiful-autumn-foliage-background-brunches-falling-tree-leaves-sky-bokeh-98280795.jpg);
+    background-image: url(/images/money-2724245.jpg);
      background-size: cover;
      background-repeat: no-repeat;
      background-attachment: fixed;

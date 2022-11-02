@@ -1,5 +1,10 @@
 const Expense = require('../models/expensedata');
 const user = require('../models/user')
+const Sequelize = require('sequelize')
+const op = Sequelize.Op;
+
+const { BlobServiceClient } = require('@azure/storage-blob');
+const { v1: uuidv1} = require('uuid');
 
 exports.postdetails =((req,res,next)=>{
     const{expense,description,category} = req.body
@@ -49,3 +54,35 @@ exports.getAllExpenses = (req,res)=>{
        return res.status(500).json({success:false , data:err})
    })
 }
+
+exports.getDailyExpense = (req,res)=>{
+    const todayDate = new Date().setHours(0,0,0,0)
+    const Now = new Date();
+  
+    const userid = req.user.id;
+    Expense.findAll({where:{userId:userid , createdAt:{[op.gt]:todayDate,[op.lt]:Now}}})
+    .then(result =>{
+      res.status(201).json(result)
+    })
+    .catch(err =>{
+      res.status(500).json(err)
+    })
+  
+  }
+  
+  
+  exports.weeklyExpense = (req,res)=>{
+      const todayDate = new Date().getDate()
+      const weeklyExpense = new Date().setDate(todayDate-7)
+      const Now = new Date();
+  
+      const userid = req.user.id;
+      Expense.findAll({where:{userId:userid , createdAt:{[op.gt]:weeklyExpense,[op.lt]:Now}}})
+      .then(result =>{
+        res.status(201).json(result)
+      })
+      .catch(err =>{
+        res.status(500).json(err)
+      })
+  
+  }

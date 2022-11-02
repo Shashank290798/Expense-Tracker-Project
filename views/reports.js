@@ -1,7 +1,7 @@
 const token = localStorage.getItem('token')
 
 window.addEventListener('DOMContentLoaded',()=>{
-    axios.get("http://localhost:3000/getReport", {headers:{"Authorization":token}})
+    axios.get("http://localhost:4000/getReport", {headers:{"Authorization":token}})
     .then(result=>{
 
         const dailyExpense = document.getElementById('dailyExpense')
@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded',()=>{
         dailyExpense.innerHTML = container;
     })
 
-        axios.get("http://localhost:3000/getWeeklyReport", {headers:{"Authorization":token}})
+        axios.get("http://localhost:4000/getWeeklyReport", {headers:{"Authorization":token}})
         .then(result=>{
             console.log(result)
             const WeeklyExpense = document.getElementById('weeklyExpense')
@@ -41,3 +41,23 @@ window.addEventListener('DOMContentLoaded',()=>{
     })
 
 })
+
+function download(){
+    axios.get('http://localhost:4000/download', { headers: {"Authorization" : token} })
+    .then((response) => {
+        if(response.status === 201){
+            //the bcakend is essentially sending a download link
+            //  which if we open in browser, the file would download
+            var a = document.createElement("a");
+            a.href = response.data.fileUrl;
+            a.download = 'myexpense.csv';
+            a.click();
+        } else {
+            throw new Error(response.data.message)
+        }
+
+    })
+    .catch((err) => {
+        showError(err)
+    });
+}

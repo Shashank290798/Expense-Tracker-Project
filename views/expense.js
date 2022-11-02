@@ -116,13 +116,7 @@ function showListofRegisteredUser(user){
 
  deleteUser(id)
 }
-const leaderboard = document.getElementById('leaderboard')
- leaderboard.addEventListener('click',()=>{
-    if(confirm('ARE U SURE'))
-    {
-        window.location = 'leaderboard.html'
-    }
- })
+
 
 const logout = document.getElementById('logout')
  logout.addEventListener('click',()=>{
@@ -131,6 +125,21 @@ const logout = document.getElementById('logout')
         window.location = 'login.html'
     }
  })
+ const leaderboard = document.getElementById('leaderboard')
+leaderboard.addEventListener('click',()=>{
+    if(confirm('ARE U SURE'))
+    {
+        window.location = 'leaderboard.html'
+    }
+ })
+ const Report = document.getElementById('Report')
+Report.addEventListener('click',()=>{
+     if(confirm('ARE U SURE'))
+     {
+         window.location = 'reports.html'
+     }
+  })
+ 
 
  document.getElementById('rzp-button1').onclick = async function (e) {
     const token = localStorage.getItem('token')
@@ -140,7 +149,7 @@ const logout = document.getElementById('logout')
     {
      "key": response.data.key_id, // Enter the Key ID generated from the Dashboard
      "name": "Test Company",
-     order_id: response.data.order.id, // For one time payment
+     "order_id": response.data.order.id, // For one time payment
      "prefill": {
        "name": "Test User",
        "email": "test.user@example.com",
@@ -162,7 +171,8 @@ const logout = document.getElementById('logout')
              document.getElementById('logout').classList.add('premium')
              document.getElementById('Addbtn').classList.add('premium')
              document.getElementById('rzp-button1').classList.add('premium')
-             document.body.innerHTML+="<a href='leaderboard.html'>leaderboard</a>" 
+             document.body.innerHTML+="<a href='leaderboard.html'>leaderboard</a>"
+             document.body.innerHTML+="<a href='reports.html'>REPORT</a>"
              document.getElementById('rzp-button1').remove()
              const logout = document.getElementById('logout')
  logout.addEventListener('click',()=>{
@@ -193,3 +203,4 @@ const logout = document.getElementById('logout')
   alert(response.error.metadata.payment_id);
  });
 }
+
